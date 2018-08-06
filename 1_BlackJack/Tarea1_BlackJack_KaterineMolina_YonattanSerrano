@@ -6,21 +6,7 @@
 '' RESULTADOS:
 ''______________INSERTAR RESULTADOS DE LAS CORRIDAS
 
-
-
-
-'*********MAIN PROGRAM
-gamesAmount = 0
 sampleAmount = 10000 '########SAMPLE AMOUNT----- CHANGE THIS VARIABLE TO GET PRECISION IN THE RESULT
-copy sampleAmount flag
-while flag>0
-   game gamesAmount
-   flag = flag - 1
-end 
- 
-result = gamesAmount/sampleAmount
-print "*******TEST RESULT*******"
-print result
 
 '**********PROCEDURE: createDeck
 newcmd createDeck deck
@@ -152,7 +138,17 @@ newcmd game gamesAmount
 ' who is the winner ?
    getWinner playerCards dealerCards gamesAmount
 end
-
+'*********MAIN PROGRAM
+gamesAmount = 0
+copy sampleAmount flag
+while flag>0
+   game gamesAmount
+   flag = flag - 1
+end 
+ 
+result = gamesAmount/sampleAmount
+print "*******TEST RESULT*******"
+print result
 
    
 '******************************************************
