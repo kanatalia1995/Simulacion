@@ -1,12 +1,14 @@
-'*******SIMULACION- II SEMESTRE 2018*******
-'*************TAREA1 BLACKJACK*************
-'**KATERINE MOLINA SANCHEZ 2013109225******
-'**YONATTAN --------------------
+'************************************************************************************
+'*****************           SIMULACION- II SEMESTRE 2018           *****************
+'*****************                 TAREA1 BLACKJACK                 *****************
+'*****************        KATERINE MOLINA SANCHEZ 2013109225        *****************
+'*****************        YONATTAN SERRANO TORRES 2014005692        *****************
+'************************************************************************************
 
 '' RESULTADOS:
-''______________INSERTAR RESULTADOS DE LAS CORRIDAS
+''____________INSERTAR RESULTADOS DE LAS CORRIDAS
 
-sampleAmount = 10000 '########SAMPLE AMOUNT----- CHANGE THIS VARIABLE TO GET PRECISION IN THE RESULT
+sampleAmount = 10000 '######## SAMPLE AMOUNT: CHANGE THIS VARIABLE TO GET PRECISION IN THE RESULT
 
 '**********PROCEDURE: createDeck
 newcmd createDeck deck
@@ -47,19 +49,23 @@ end
 newcmd getWinner playerCard dealerCard games
    countCards playerCard playerAmount
    countCards dealerCard dealerAmount
-   print "Result"
+   print "------------Game-----------"
    print playerAmount
    print dealerAmount
    if playerAmount <= 21
       if dealerAmount<= 21
          if playerAmount > dealerAmount
             games = games +1 '' When the player win
-            print "Player winner!!!!"
+            print "The player wins!!!!"
+         else 
+            print "The dealer wins!!!!"
          end
       else
          games = games + 1
-         print "Player winner!!!!"
+         print "The player wins!!!!"
       end
+    else 
+        print "The dealer wins!!!!"
    end
 end
 
@@ -138,6 +144,7 @@ newcmd game gamesAmount
 ' who is the winner ?
    getWinner playerCards dealerCards gamesAmount
 end
+
 '*********MAIN PROGRAM
 gamesAmount = 0
 copy sampleAmount flag
@@ -149,6 +156,32 @@ end
 result = gamesAmount/sampleAmount
 print "*******TEST RESULT*******"
 print result
+
+'···················· RESULTS ·························
+
+' result: 0.4348
+' result: 0.4379
+' result: 0.4298
+' result: 0.4205
+' result: 0.4296
+' result: 0.4339
+' result: 0.4242
+' result: 0.4315
+' result: 0.4331
+' result: 0.4258
+' result: 0.4233
+' result: 0.4269
+' result: 0.4285
+' result: 0.4331
+' result: 0.4325
+' result: 0.4269
+' result: 0.4257
+' result: 0.4285
+' result: 0.4237
+' result: 0.4272
+'---------------
+' Prom: 0.42887
+
 
    
 '******************************************************
