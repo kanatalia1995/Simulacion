@@ -5,9 +5,32 @@
 '*****************        YONATTAN SERRANO TORRES 2014005692        *****************
 '************************************************************************************
 
-'' RESULTADOS:
-''____________INSERTAR RESULTADOS DE LAS CORRIDAS
+'···················· RESULTS ·························
 
+' result: 0.4348
+' result: 0.4379
+' result: 0.4298
+' result: 0.4205
+' result: 0.4296
+' result: 0.4339
+' result: 0.4242
+' result: 0.4315
+' result: 0.4331
+' result: 0.4258
+' result: 0.4233
+' result: 0.4269
+' result: 0.4285
+' result: 0.4331
+' result: 0.4325
+' result: 0.4269
+' result: 0.4257
+' result: 0.4285
+' result: 0.4237
+' result: 0.4272
+'---------------
+' Average: 0.42887
+
+'································································································
 sampleAmount = 10000 '######## SAMPLE AMOUNT: CHANGE THIS VARIABLE TO GET PRECISION IN THE RESULT
 
 '**********PROCEDURE: createDeck
@@ -157,30 +180,7 @@ result = gamesAmount/sampleAmount
 print "*******TEST RESULT*******"
 print result
 
-'···················· RESULTS ·························
 
-' result: 0.4348
-' result: 0.4379
-' result: 0.4298
-' result: 0.4205
-' result: 0.4296
-' result: 0.4339
-' result: 0.4242
-' result: 0.4315
-' result: 0.4331
-' result: 0.4258
-' result: 0.4233
-' result: 0.4269
-' result: 0.4285
-' result: 0.4331
-' result: 0.4325
-' result: 0.4269
-' result: 0.4257
-' result: 0.4285
-' result: 0.4237
-' result: 0.4272
-'---------------
-' Average: 0.42887
 
 
    
