@@ -1,0 +1,152 @@
+'************************************************************************************
+'*****************           SIMULACION- II SEMESTRE 2018           *****************
+'*****************                 TAREA2 RUISEÑOR                  *****************
+'*****************        KATERINE MOLINA SANCHEZ 2013109225        *****************
+'*****************        YONATTAN SERRANO TORRES 2014005692        *****************
+'************************************************************************************
+
+'···················· RESULTS ·························
+
+
+
+'······················································
+' Set up this variable to specific simulation 
+
+' Gambling Variables
+bankroll = 2000
+startBet = 100
+strategy = true '  false for Classic true for Nightingale
+maxBankroll = 2500
+
+' Simulation Variables 
+cyclesNum = 100
+
+'-----------------------------------------------------
+
+
+' Code
+
+' MAIN PROCEDURES********************************************
+
+' PROCEDURE: VALIDATEBET**********************************
+' Note: This procedure substract the bet if the bet is true
+NEWCMD VALIDATEBET bankroll bet flag
+   IF bet > bankroll
+      bet = bankroll
+      bankroll = 0
+      flag = true
+   ELSEIF bet <= bankroll
+      bankroll =  bankroll - bet
+      flag = true
+   ELSE
+      flag = false
+   END
+END
+
+
+' PROCEDURE: GETWINNER**********************************
+
+NEWCMD GETWINNER prob winnerFlag
+   SHUFFLE prob prob
+   TAKE prob 1 winner
+   PRINT prob winner
+   IF winner = 0
+      winnerFlag = false ' Player lost the game
+   ELSE
+      winnerFlag = true
+   END
+END
+
+' PROCEDURE: WINNERUPDATE**********************************
+
+NEWCMD WINNERUPDATE bankroll bet
+   bankroll = bankroll + (bet * 2)
+END
+
+' PROCEDURE: VALIDATEGAME**********************************
+
+NEWCMD VALIDATEGAME bankroll maxBankroll flag gameAmount
+   IF maxBankroll = bankroll
+      gameAmount = gameAmount + 1
+      COPY 1 flag'  true means that the game ended
+   ELSEIF bankroll = 0
+      COPY 1 flag
+   ELSE
+      COPY 0 flag
+   END
+END
+
+'PROCEDURE: PRINTSTATE**********************************
+
+NEWCMD PRINTSTATE bankroll bet state
+   PRINT bankroll  bet  state
+END
+
+
+
+
+' STRATEGIES********************************************
+' Classic Strategy **************************************
+
+NEWCMD CLASSICSTRATEGY initialBet bet
+   bet = initialBet   ' use always the same bet
+END
+
+
+' Nightingale Strategy **************************************
+NEWCMD NIGHTINGALESTRATEGY initialBet bet lastGame
+   IF lastGame
+      bet = initialBet
+   ELSE
+      bet = 2*bet
+   END
+END
+
+
+'PROCEDURE: GAME **************************************************
+
+NEWCMD GAME gameAmount strategy initialBet bankroll maxBankroll prob
+   flag = 0
+   winnerFlag = true
+   bet = initialBet
+   UNTIL  flag = 1
+      IF strategy
+         NIGHTINGALESTRATEGY initialBet bet winnerFlag
+      ELSE
+         CLASSICSTRATEGY initialBet bet
+      END
+      VALIDATEBET bankroll bet betFlag
+      IF betFlag
+         GETWINNER prob winnerFlag
+         IF winnerFlag
+            WINNERUPDATE bankroll bet
+         END
+      END
+      'PRINTSTATE bankroll bet winnerFlag
+      VALIDATEGAME bankroll maxBankroll flag gameAmount
+   END
+END
+
+
+'MAIN PROGRAM ******************************************************
+
+CLEAROUTPUT
+' Create probability bag
+COPY 42#1 58#0 prob
+SHUFFLE prob prob
+
+'Game amount 
+gameAmount = 0
+
+' Start simulation 
+
+REPEAT cyclesNum
+   bankrollM =  bankroll
+   GAME gameAmount strategy startBet bankroll maxBankroll prob
+   bankroll = bankrollM
+END
+
+result = gameAmount/cyclesNum
+
+PRINT "RESULT:" result
+
