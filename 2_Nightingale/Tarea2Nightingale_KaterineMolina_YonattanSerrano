@@ -1,21 +1,72 @@
 '************************************************************************************
 '*****************           SIMULACION- II SEMESTRE 2018           *****************
-'*****************                 TAREA2 RUISE�OR                  *****************
+'*****************                 TAREA2 RUISEÑOR                  *****************
 '*****************        KATERINE MOLINA SANCHEZ 2013109225        *****************
 '*****************        YONATTAN SERRANO TORRES 2014005692        *****************
 '************************************************************************************
 
-'�������������������� RESULTS �������������������������
+'···················· RESULTS FOR NIGHTINGALE ·························
+'result: 0.57
+'result: 0.53
+'result: 0.64
+'result: 0.58
+'result: 0.7
+'result: 0.59
+'result: 0.65
+'result: 0.64
+'result: 0.6
+'result: 0.63
+'result: 0.65
+'result: 0.6
+'result: 0.62
+'result: 0.61
+'result: 0.6
+'result: 0.57
+'result: 0.55
+'result: 0.57
+'result: 0.61
+'result: 0.58
+'result: 0.61
+'--------------
+'Average: 0.635 
+
+'······················································
 
 
+'···················· RESULTS FOR CLASSIC ·························
+'result: 0.17
+'result: 0.17
+'result: 0.12
+'result: 0.2
+'result: 0.16
+'result: 0.15
+'result: 0.23
+'result: 0.21
+'result: 0.19
+'result: 0.16
+'result: 0.2
+'result: 0.16
+'result: 0.16
+'result: 0.2
+'result: 0.21
+'result: 0.26
+'result: 0.18
+'result: 0.17
+'result: 0.2
+'result: 0.23
+'result: 0.17
+'--------------
+'Average: 0.195
 
-'������������������������������������������������������
+'······················································
+'                    INSTRUCTIONS
+'······················································
 ' Set up this variable to specific simulation 
 
-' Gambling Variables
+'Gambling Variables
 bankroll = 2000
 startBet = 100
-strategy = true '  false for Classic true for Nightingale
+strategy = true '****false for Classic true for Nightingale****
 maxBankroll = 2500
 
 ' Simulation Variables 
@@ -23,13 +74,15 @@ cyclesNum = 100
 
 '-----------------------------------------------------
 
-
-' Code
+'······················································
+'                          Code
+'······················································
 
 ' MAIN PROCEDURES********************************************
 
 ' PROCEDURE: VALIDATEBET**********************************
 ' Note: This procedure substract the bet if the bet is true
+
 NEWCMD VALIDATEBET bankroll bet flag
    IF bet > bankroll
       bet = bankroll
@@ -149,4 +202,3 @@ END
 result = gameAmount/cyclesNum
 
 PRINT "RESULT:" result
-
