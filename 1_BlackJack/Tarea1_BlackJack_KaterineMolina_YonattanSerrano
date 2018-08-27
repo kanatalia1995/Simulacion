@@ -1,198 +1,146 @@
 '************************************************************************************
 '*****************           SIMULACION- II SEMESTRE 2018           *****************
-'*****************                 TAREA1 BLACKJACK                 *****************
+'*****************                 TAREA 3 Poker                    *****************
 '*****************        KATERINE MOLINA SANCHEZ 2013109225        *****************
 '*****************        YONATTAN SERRANO TORRES 2014005692        *****************
 '************************************************************************************
 
-'···················· RESULTS ·························
 
-' result: 0.4348
-' result: 0.4379
-' result: 0.4298
-' result: 0.4205
-' result: 0.4296
-' result: 0.4339
-' result: 0.4242
-' result: 0.4315
-' result: 0.4331
-' result: 0.4258
-' result: 0.4233
-' result: 0.4269
-' result: 0.4285
-' result: 0.4331
-' result: 0.4325
-' result: 0.4269
-' result: 0.4257
-' result: 0.4285
-' result: 0.4237
-' result: 0.4272
-'---------------
-' Average: 0.42887
+'************************************************************************************************
 
-'································································································
-sampleAmount = 10000 '######## SAMPLE AMOUNT: CHANGE THIS VARIABLE TO GET PRECISION IN THE RESULT
+' Running de program: 
+' You just have to run this program and select the file: 90_Test_Uniforme_01.txt
 
-'**********PROCEDURE: createDeck
-newcmd createDeck deck
-   copy 4#1,13 deck
-   shuffle deck deck
-   'print deck
-end
+'************************************************************************************************
 
-'**********PROCEDURE: initGame
-newcmd initGame playerCards dealerCards deck
-   take deck (1 3) playerCards
-   take deck (2 4) dealerCards
-   remove deck (1 2 3 4) deck
-  ' print playerCards dealerCards deck
-end
+' Results: 
 
-'**********PROCEDURE: countCards
-newcmd countCards cards total
-   copy cards cardCopy
-   recode cardCopy between 10 13 10 cardCopy
-   sum cardCopy amountTotal
-   if (1 memberof cardCopy) and (amountTotal + 10)<=21
-      total = amountTotal + 10
-   else
-      total = amountTotal
-   end
-end
-
-'**********PROCEDURE: getCard
-newcmd getCard deck playerDeck
-   take deck 1 card
-   remove deck 1 deck
-   copy playerDeck card playerDeck
-end
-
-'**********PROCEDURE: getWinner
-
-newcmd getWinner playerCard dealerCard games
-   countCards playerCard playerAmount
-   countCards dealerCard dealerAmount
-   print "------------Game-----------"
-   print playerAmount
-   print dealerAmount
-   if playerAmount <= 21
-      if dealerAmount<= 21
-         if playerAmount > dealerAmount
-            games = games +1 '' When the player win
-            print "The player wins!!!!"
-         else 
-            print "The dealer wins!!!!"
-         end
-      else
-         games = games + 1
-         print "The player wins!!!!"
-      end
-    else 
-        print "The dealer wins!!!!"
-   end
-end
-
-'STRATEGIES ****************************************
-'**********PROCEDURE: dealerStrategy
-newcmd dealerStrategy cards flag visibleCard
-   countCards cards amount
-   if amount>=17
-      flag = 0
-   else
-      flag = 1
-   end
-end
-
-'**********PROCEDURE: playerSrategy
-newcmd playerStrategy cards flag visibleCard
-   countCards cards amount '**count the cards
-   if (3<amount) and (amount<12)
-      flag = 1
-   elseif amount = 12
-      if (3<visibleCard) and (visibleCard<7)
-         flag = 0
-      else
-         flag = 1
-      end
-   elseif (12<amount) and (amount<17)
-      if (6<visibleCard) or (visibleCard = 1)
-         flag = 1
-      else
-         flag = 0
-      end
-   elseif amount>16
-      flag = 0
-   else 'default
-      flag = 0
-   end
-end
-
-
-'INDIVIDUALS GAMES ****************************************
-'**********PROCEDURE: playerGame 
-newcmd playerGame playerCards deck visibleCard
-   flow = true
-   while flow
-      playerStrategy playerCards flag visibleCard
-      if flag = 1
-         getcard deck playerCards
-      else
-         flow = false
-      end
-   end
-end
-'**********PROCEDURE: dealerGame
-newcmd dealerGame dealerCards deck visibleCard
-   flow = true
-   while flow
-      dealerStrategy dealerCards flag visibleCard
-      if flag = 1
-         getcard deck dealerCards
-      else
-         flow = false
-      end
-   end
-end
-'**********PROCEDURE:game
-newcmd game gamesAmount
-   createDeck deck
-   initGame playerCards dealerCards deck
-'Get visible dealer card 
-   take dealerCards 2 dealerCard
-'Get visible player card
-   take playerCards 2 playerCard
-'init game
-   playerGame playerCards deck dealerCard
-   dealerGame dealerCards deck playerCard
-' who is the winner ?
-   getWinner playerCards dealerCards gamesAmount
-end
-
-'*********MAIN PROGRAM
-gamesAmount = 0
-copy sampleAmount flag
-while flag>0
-   game gamesAmount
-   flag = flag - 1
-end 
- 
-result = gamesAmount/sampleAmount
-print "*******TEST RESULT*******"
-print result
+' OFList  	EFList  
+' 311     	302.4   	
+' 499     	504     	
+' 107     	108     	
+' 72      	72      	
+' 6       	9       	
+' 5       	4.5     	
+' 0       	0.1     	
+' s0: 1.4589947089947104
 
 
 
+'************************************************************************************************
 
-   
-'******************************************************
-' TEST AREA 
-' Create deck
-   
-'createDeck deck
-   
-' Init game 
-'initGame playerCards dealerCards deck
-'copy (1 1 2) cards
-'getCard deck cards
-'countCards cards res
-'print cards
+' H0: YES, it's a distribution f(x) with its parameters
+' H1: NO, It isn't a distribution f(x) with its parameters
+
+
+' To calculate the rejection point we will use an alpha value of 0.05 with 
+' 7-1 = 6 degrees of freedom.
+
+' \/2
+' /\ (0.05,6) = 12.5916 (This value is from the Ji square table)
+
+' As the value of 1.4589947089947104 <= 12.5916, H0 is accepted and therefore it is assumed that 
+' the numbers generated correspond to a uniform distribution.
+
+
+'************************************************************************************************
+
+
+CLEAROUTPUT
+
+
+' Global variables -------------------------------------------------
+COPY (0 0 0 0 0 0 0 ) OFList  ' Observed Frecuencies List
+COPY (0 0 0 0 0 0 0 ) EFList  ' Expected Frecuencies List
+COPY (0.3024 0.5040 0.1080 0.0720 0.0090 0.0045 0.0001) EPList 'Expected Probabilities List
+
+
+NEWCMD INCREASE_COUNTER key list
+   TAKE list key num
+   num = num + 1 ' INCREASE
+   PUT  num key list
+END
+
+
+NEWCMD FILTER_NUMBER numberList fo
+' 5 numbers repeated
+   MULTIPLES numberList =5 result
+   IF result=1
+      INCREASE_COUNTER 7 fo
+   ELSE
+      MULTIPLES numberList =4 result
+      IF result = 1
+         INCREASE_COUNTER 6 fo
+      ELSE
+         MULTIPLES numberList =3 result
+         IF result = 1
+            MULTIPLES numberList =2 result
+            IF result = 1
+               INCREASE_COUNTER 5 fo
+            ELSE
+               INCREASE_COUNTER 4 fo
+            END
+         ELSE
+            MULTIPLES numberList =2 result
+            IF result = 2
+               INCREASE_COUNTER 3 fo
+            ELSEIF result = 1
+               INCREASE_COUNTER 2 fo
+            ELSE
+               MULTIPLES numberList =1 result
+               IF result =5
+                  INCREASE_COUNTER 1 fo
+               END
+            END
+         END
+      END
+   END
+END
+'***** PROFESSOR CODE
+NEWCMD EXPLOTE num list
+   list = ()
+   t = num * 100000
+   INTEGER truncate t t
+   numCycles = 5
+   REPEAT numCycles
+      rem = t % 10
+      quo = t / 10
+      INTEGER truncate quo quo
+      
+      t = quo
+      SCORE rem list
+   END
+END
+
+
+NEWCMD GET_OBSERVED_FRECUENCIES list OFList
+   FOREACH num list
+      EXPLOTE num numList
+      FILTER_NUMBER numList OFlist
+   END
+END
+
+NEWCMD GET_EXPECTED_FRECUENCIES sampleSize  EFList EPList
+   index = 1
+   FOREACH probability EPList
+      expectedFrecuency = probability * sampleSize
+      PUT expectedFrecuency index EFList
+      index = index +1
+   END
+END
+
+
+'MAIN PROGRAM -----------------------------------------------------
+
+READ file "" fileList
+
+GET_OBSERVED_FRECUENCIES  fileList OFList
+SIZE fileList fileSize
+GET_EXPECTED_FRECUENCIES fileSize EFList EPList
+
+
+'Calculate chiSquare Num
+CHISQUARE OFList EFList s0
+'--Print tables and result------------------
+PRINT table OFList%8.0F EFList%8.4F
+PRINT s0
