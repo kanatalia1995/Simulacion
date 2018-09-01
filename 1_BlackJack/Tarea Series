@@ -1,0 +1,295 @@
+'************************************************************************************
+'*****************           SIMULACION- II SEMESTRE 2018           *****************
+'*****************                 TAREA 4 Series                   *****************
+'*****************        KATERINE MOLINA SANCHEZ 2013109225        *****************
+'*****************        YONATTAN SERRANO TORRES 2014005692        *****************
+'************************************************************************************
+
+
+'************************************************************************************************
+
+' Running de program: 
+' You just have to run this program and select the file: 90_Test_Uniforme_01.txt
+
+'************************************************************************************************
+
+'>>>>> () Ask about the size of the interval (0.10, 0.20, 0.25 ...)
+
+'For this part, you just have to run the program, then you have to enter the interval,
+'the designed space is at the bottom of the screen with the phrase "Please enter raw_range". 
+
+
+
+'>>>>> () Read a file with data.
+
+'If it's the first time that you're running the program, you have to choose the location 
+'of the file with the data. The program will atomatically ask you to choose that file. 
+
+
+
+'>>>>> () Present the frequency of data on a surface
+' Results with the corresponding interval (We use three intervals for testing purposes) 
+
+'Interval: 0.10
+'*********************
+'OFList  	EFList  
+'11      	9.99    	
+'4       	9.99    	
+'9       	9.99    	
+'11      	9.99    	
+'11      	9.99    	
+'10      	9.99    	
+'5       	9.99    	
+'16      	9.99    	
+'7       	9.99    	
+'10      	9.99    	
+'10      	9.99    	
+'10      	9.99    	
+'15      	9.99    	
+'9       	9.99    	
+'16      	9.99    	
+'8       	9.99    	
+'8       	9.99    	
+'9       	9.99    	
+'7       	9.99    	
+'7       	9.99    	
+'11      	9.99    	
+'14      	9.99    	
+'2       	9.99    	
+'11      	9.99    	
+'12      	9.99    	
+'13      	9.99    	
+'7       	9.99    	
+'5       	9.99    	
+'14      	9.99    	
+'9       	9.99    	
+'5       	9.99    	
+'7       	9.99    	
+'12      	9.99    	
+'11      	9.99    	
+'11      	9.99    	
+'9       	9.99    	
+'12      	9.99    	
+'7       	9.99    	
+'12      	9.99    	
+'11      	9.99    	
+'13      	9.99    	
+'11      	9.99    	
+'8       	9.99    	
+'13      	9.99    	
+'14      	9.99    	
+'7       	9.99    	
+'16      	9.99    	
+'14      	9.99    	
+'12      	9.99    	
+'13      	9.99    	
+'5       	9.99    	
+'12      	9.99    	
+'14      	9.99    	
+'12      	9.99    	
+'9       	9.99    	
+'6       	9.99    	
+'9       	9.99    	
+'5       	9.99    	
+'8       	9.99    	
+'8       	9.99    	
+'8       	9.99    	
+'11      	9.99    	
+'12      	9.99    	
+'10      	9.99    	
+'16      	9.99    	
+'11      	9.99    	
+'9       	9.99    	
+'7       	9.99    	
+'10      	9.99    	
+'8       	9.99    	
+'11      	9.99    	
+'11      	9.99    	
+'9       	9.99    	
+'6       	9.99    	
+'10      	9.99    	
+'8       	9.99    	
+'10      	9.99    	
+'5       	9.99    	
+'11      	9.99    	
+'12      	9.99    	
+'12      	9.99    	
+'12      	9.99    	
+'9       	9.99    	
+'6       	9.99    	
+'13      	9.99    	
+'7       	9.99    	
+'12      	9.99    	
+'14      	9.99    	
+'8       	9.99    	
+'10      	9.99    	
+'8       	9.99    	
+'7       	9.99    	
+'8       	9.99    	
+'8       	9.99    	
+'10      	9.99    	
+'9       	9.99    	
+'14      	9.99    	
+'11      	9.99    	
+'14      	9.99    	
+'15      	9.99    
+'---------------------	
+'s0: 87.78678678678682
+
+
+'Interval: 0.20
+'*********************
+'OFList  	EFList  
+'35      	39.96   	
+'44      	39.96   	
+'45      	39.96   	
+'38      	39.96   	
+'31      	39.96   	
+'37      	39.96   	
+'36      	39.96   	
+'45      	39.96   	
+'31      	39.96   	
+'46      	39.96   	
+'41      	39.96   	
+'47      	39.96   	
+'36      	39.96   	
+'44      	39.96   	
+'41      	39.96   	
+'41      	39.96   	
+'37      	39.96   	
+'45      	39.96   	
+'31      	39.96   	
+'41      	39.96   	
+'39      	39.96   	
+'31      	39.96   	
+'39      	39.96   	
+'51      	39.96   	
+'47      	39.96     
+'----------------------	
+'s0: 19.293293293293292
+
+'Interval: 0.25
+'*********************
+'OFList  	EFList  
+'55      	62.4375 	
+'74      	62.4375 	
+'55      	62.4375 	
+'57      	62.4375 	
+'60      	62.4375 	
+'72      	62.4375 	
+'63      	62.4375 	
+'73      	62.4375 	
+'64      	62.4375 	
+'67      	62.4375 	
+'47      	62.4375 	
+'55      	62.4375 	
+'62      	62.4375 	
+'56      	62.4375 	
+'68      	62.4375 	
+'71      	62.4375   
+'----------------------	
+'s0: 15.150150150150152
+
+
+
+'>>>>> () Present the sub-chi square value.
+
+'Interval: 0.10
+'s0: 87.78678678678682
+
+'Interval: 0.20
+'s0: 19.293293293293292
+
+'Interval: 0.25
+'s0: 15.150150150150152
+
+
+'********************************PROGRAM**********************************
+
+INCLUDE "/lib/mathCommands.txt"
+CLEAROUTPUT
+
+'AUXILIAR PROCEDURES -----------------------------------------------------
+NEWCMD INCREASE_COUNTER key list
+   TAKE list key num
+   num = num + 1 ' INCREASE
+   PUT  num key list
+END
+
+'----FILTER_NUMBERS
+' Increase the field where the numbers matchs 
+' Number 1 =  Gives the X position 
+' Number 2 =  Gives the Y position 
+' Note: The OFList is represented like  x y coordinates 
+
+NEWCMD FILTER_NUMBERS number_1 number_2 OFlist t_size raw raw_Range
+   'Local variables ------------------------------
+   y_position = 0 'Current column
+   x_position = 1  'Current raw
+   low_Interval = 0' Initial value for interval
+   high_interval = raw_range '
+   
+   UNTIL y_position = raw  '------ Find based in Y position
+      IF (number_2 >= low_Interval) and (number_2 < high_interval) ''-----If the second number is in this interval
+         low_Interval = 0
+         high_interval = raw_range
+         UNTIL x_position > raw  '----- Find based X position 
+            IF (number_1 >= low_Interval) and (number_1 < high_interval)
+               BREAK 
+            ELSE
+	 '------Increase interval values
+               low_Interval = high_interval
+               high_interval = high_interval + raw_range
+               x_position = x_position + 1
+            END
+         END
+         BREAK
+      ELSE
+         low_Interval = high_interval
+         high_interval = high_interval + raw_range
+         y_position = y_position + 1
+      END
+      
+   END
+   position = (y_position * raw) + (x_position) '----- Get the position in the list
+   INCREASE_COUNTER position  OFList
+END
+
+NEWCMD GET_OBSERVED_FRECUENCIES list file_size OFList t_size raw raw_Range
+   counter = 1
+   WHILE counter < file_size
+      TAKE list counter number_1
+      next_number = counter + 1
+      TAKE list  next_number number_2
+      FILTER_NUMBERS number_1 number_2 OFlist t_size raw raw_Range
+      counter = counter + 1
+   END
+END
+
+'MAIN PROGRAM -----------------------------------------------------
+
+' User variables ********
+INPUT raw_Range  'size of matrix interval
+READ file "" fileList
+
+' Global variables *****
+
+raw = 1/raw_Range 'Total amount of raws
+t_size = raw*raw 'Size of the frecuencies lists
+
+'Expected Probability ********
+SIZE fileList fileSize
+e_probability = (fileSize - 1)/t_size
+
+'List declaration ***********
+COPY t_size#0 OFList  ' Observed Frecuencies List
+COPY t_size#e_probability EFList  ' Expected Frecuencies List
+
+GET_OBSERVED_FRECUENCIES  fileList fileSize OFList t_size raw raw_Range
+
+'Calculate chiSquare Number 
+CHISQUARE OFList EFList s0
+'--Print tables and result------------------
+
+PRINT table OFList%8.0F EFList%8.4F
+PRINT s0
