@@ -1,0 +1,221 @@
+'************************************************************************************
+'*****************           SIMULACION- II SEMESTRE 2018           *****************
+'*****************                 TAREA 5 Ji cuadrado              *****************
+'*****************        KATERINE MOLINA SANCHEZ 2013109225        *****************
+'*****************        YONATTAN SERRANO TORRES 2014005692        *****************
+'************************************************************************************
+
+'************************************************************************************************
+
+' Running de program: 
+' You just have to run this program and select the file: Muestra_Normal.txt
+
+'************************************************************************************************
+
+' To do: 
+' Read the sample data.
+' Read the size of the interval.
+' Group them according to an interval.
+' Count the observed frequencies.
+' Calculate the expected frequencies.
+' Remove the data that should not be included in the test.
+' Calculate the sub chi square value.
+
+'************************************************************************************************
+
+' Data:
+
+' bin_size: 1.0
+' -----Sample_ average-----
+' average: 49.9633148309
+' -----Standart_Deviation-----
+' std_deviation: 5.025748496318242
+
+
+' Results: 
+
+'------Table of all sample frecuencies-------
+
+'obs_frecuencies	exp_frecuencies
+'1             	0.204537      	
+'0.0E00        	0.449683      	
+'0.0E00        	0.95039       	
+'2             	1.930892      	
+'5             	3.771163      	
+'8             	7.080336      	
+'16            	12.778909     	
+'19            	22.171507     	
+'39            	36.979262     	
+'55            	59.290215     	
+'95            	91.38389      	
+'154           	135.399856    	
+'176           	192.85406     	
+'256           	264.059304    	
+'346           	347.565239    	
+'452           	439.777932    	
+'551           	534.924904    	
+'592           	625.481593    	
+'650           	703.07008     	
+'797           	759.705189    	
+'826           	789.139857    	
+'815           	787.998306    	
+'685           	756.41304     	
+'743           	697.999546    	
+'599           	619.175358    	
+'525           	528.000766    	
+'433           	432.830413    	
+'357           	341.08551     	
+'263           	258.387204    	
+'194           	188.165892    	
+'122           	131.726425    	
+'97            	88.647588     	
+'55            	57.348607     	
+'26            	35.664871     	
+'20            	21.321619     	
+'10            	12.253533     	
+'8             	6.769614      	
+'5             	3.59524       	
+'2             	1.835495      	
+'1             	0.900823      	
+
+
+'------Table of frecuencies >= 5 -------
+'obs_frecuencies	exp_frecuencies
+'8             	7.080336      	
+'16            	12.778909     	
+'19            	22.171507     	
+'39            	36.979262     	
+'55            	59.290215     	
+'95            	91.38389      	
+'154           	135.399856    	
+'176           	192.85406     	
+'256           	264.059304    	
+'346           	347.565239    	
+'452           	439.777932    	
+'551           	534.924904    	
+'592           	625.481593    	
+'650           	703.07008     	
+'797           	759.705189    	
+'826           	789.139857    	
+'815           	787.998306    	
+'685           	756.41304     	
+'743           	697.999546    	
+'599           	619.175358    	
+'525           	528.000766    	
+'433           	432.830413    	
+'357           	341.08551     	
+'263           	258.387204    	
+'194           	188.165892    	
+'122           	131.726425    	
+'97            	88.647588     	
+'55            	57.348607     	
+'26            	35.664871     	
+'20            	21.321619     	
+'10            	12.253533     	
+'8             	6.769614      	
+'CHI SQUARE
+'s0: 33.59281262176942
+
+'************************************************************************************************
+
+
+INCLUDE "/lib/splitSubroutines.txt"
+INCLUDE "/lib/vectorCommands.txt"
+INCLUDE "/lib/mathCommands.txt"
+CLEAROUTPUT
+
+'AUXILIAR PROCEDURES -----------------------------------------------------
+'Professor Code-----------------------------------------------------------
+'Calcula la probabilidad de una distribuci�n normal dentro del rango
+NEWCMD PROBNORMALRANGO limInf limSup promedio desviaci�n prob
+   NORMALPROB limInf promedio desviaci�n probInf
+   NORMALPROB limSup promedio desviaci�n probSup
+   prob = probSup - probInf
+END
+
+NEWCMD GET_EXPECTED_FRECUENCIES bin_ini bin_size sample_size e_frecuencies average std_deviation
+   counter = 1
+   SIZE bin_ini b_size
+   WHILE counter <= b_size
+      TAKE bin_ini counter low_interval
+      high_interval = low_interval + bin_size      
+      PROBNORMALRANGO low_interval high_interval average std_deviation probability
+      exp_frecuency = sample_size * probability
+      PUT exp_frecuency counter e_frecuencies
+      counter = counter + 1
+   END
+END
+
+NEWCMD GET_SPLIT_INDEX exp_frecuencies index
+   index = 1
+   flag = true
+   WHILE(flag)
+      TAKE exp_frecuencies index number
+      IF number >= 5
+         flag = false
+         index = index - 1
+      ELSE
+         index = index +1
+      END
+   END
+END
+
+NEWCMD CLEAN_FRECUENCY_TABLES obs_frecuencies exp_frecuencies
+   GET_SPLIT_INDEX exp_frecuencies low_index
+   IF low_index > 0
+      SPLIT exp_frecuencies low_index ignore_part1 exp_frecuencies
+      SPLIT obs_frecuencies low_index ignore_part2 obs_frecuencies
+   END
+   REVERSE exp_frecuencies exp_frecuencies
+   REVERSE obs_frecuencies obs_frecuencies
+   
+   GET_SPLIT_INDEX exp_frecuencies high_index
+   IF high_index > 0
+      SPLIT exp_frecuencies high_index ignore_part1 exp_frecuencies
+      SPLIT obs_frecuencies high_index ignore_part2 obs_frecuencies
+   END
+   REVERSE exp_frecuencies exp_frecuencies
+   REVERSE obs_frecuencies obs_frecuencies
+END
+
+'MAIN PROGRAM -----------------------------------------------------
+
+'User variables ********
+INPUT bin_size  'size of bin size
+READ file "" sample_list
+'COPY 20#500 65#1500 25#2500 sample_list
+
+' Global variables *****
+
+'Histogram data*******************
+HISTOGRAM binsize bin_size  sample_list
+HISTOGRAMDATA binsize bin_size sample_list bin_n bin_ini bin_center obs_frecuencies cumFreq
+
+' Stadistic Data**************
+MEAN sample_list average
+STDEV sample_list std_deviation
+SIZE sample_list sample_size
+
+PRINT "-----Sample_ average-----"
+PRINT average
+PRINT "-----Standart_Deviation-----"
+PRINT std_deviation
+
+' Expected Frecuencies**********
+' It depends of bin_size according to normal distribution 
+
+GET_EXPECTED_FRECUENCIES  bin_ini bin_size sample_size exp_frecuencies average std_deviation
+
+PRINT  "------Table of all sample frecuencies-------"
+PRINT table obs_frecuencies exp_frecuencies
+
+CLEAN_FRECUENCY_TABLES obs_frecuencies exp_frecuencies
+PRINT  "\n\n------Table of frecuencies >= 5 -------"
+PRINT table obs_frecuencies exp_frecuencies
+
+'Calculate chiSquare Number 
+CHISQUARE obs_frecuencies exp_frecuencies s0
+'--Print result------------------
+PRINT "CHI SQUARE" s0
+
+
