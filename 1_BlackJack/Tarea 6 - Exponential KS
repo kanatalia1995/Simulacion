@@ -1,0 +1,214 @@
+'************************************************************************************
+'*****************           SIMULACION- II SEMESTRE 2018           *****************
+'*****************                 TAREA 5 Ji cuadrado              *****************
+'*****************        KATERINE MOLINA SANCHEZ 2013109225        *****************
+'*****************        YONATTAN SERRANO TORRES 2014005692        *****************
+'************************************************************************************
+
+'************************************************************************************************
+
+' Running de program: 
+' You just have to run this program and select the file: 02_Muestra_Exponencial.txt
+
+'************************************************************************************************
+
+
+'*********************************************TASKS**********************************************
+' - Read the size of the interval. -------------------------- 
+
+' For this task, you must enter the desired interval after 
+' running the program.
+
+' - Read the sample data. -----------------------------------
+
+' The system will ask you to enter the file that contains 
+' the data from the browser.
+
+' - Group them according to an interval. --------------------
+
+' This task is reflected in the "results table".
+
+' - Calculate the cumulative observed probability. ----------
+
+' This task is reflected in the "results table".
+ 
+' - Calculate the cumulative expected probability. ----------
+
+' This task is reflected in the "results table".
+
+' - Calculate the "d" value of KS. --------------------------
+
+' This task is reflected at the end of the "results table".
+'************************************************************************************************
+
+'******************************************************RESULTS*********************************************************
+
+'n 	interval	obs_frecuencies	exp_cum_probabilities	obs_cum_probabilities	exp_obs_absolute
+'1 	1       	1298           	0.1332               	0.1298               	0.0034  	
+'2 	2       	1195           	0.2487               	0.2493               	0.0006  	
+'3 	3       	1096           	0.3488               	0.3589               	0.0101  	
+'4 	4       	861            	0.4355               	0.445                	0.0095  	
+'5 	5       	717            	0.5107               	0.5167               	0.006   	
+'6 	6       	652            	0.5759               	0.5819               	0.006   	
+'7 	7       	577            	0.6324               	0.6396               	0.0072  	
+'8 	8       	476            	0.6814               	0.6872               	0.0058  	
+'9 	9       	409            	0.7238               	0.7281               	0.0043  	
+'10	10      	337            	0.7606               	0.7618               	0.0012  	
+'11	11      	279            	0.7925               	0.7897               	0.0028  	
+'12	12      	291            	0.8201               	0.8188               	0.0013  	
+'13	13      	229            	0.8441               	0.8417               	0.0024  	
+'14	14      	202            	0.8649               	0.8619               	0.003   	
+'15	15      	204            	0.8829               	0.8823               	0.0006  	
+'16	16      	169            	0.8985               	0.8992               	0.0007  	
+'17	17      	129            	0.912                	0.9121               	0.0001  	
+'18	18      	116            	0.9237               	0.9237               	0       	
+'19	19      	88             	0.9339               	0.9325               	0.0014  	
+'20	20      	79             	0.9427               	0.9404               	0.0023  	
+'21	21      	77             	0.9503               	0.9481               	0.0022  	
+'22	22      	61             	0.9569               	0.9542               	0.0027  	
+'23	23      	62             	0.9627               	0.9604               	0.0023  	
+'24	24      	54             	0.9676               	0.9658               	0.0018  	
+'25	25      	44             	0.972                	0.9702               	0.0018  	
+'26	26      	33             	0.9757               	0.9735               	0.0022  	
+'27	27      	32             	0.9789               	0.9767               	0.0022  	
+'28	28      	23             	0.9817               	0.979                	0.0027  	
+'29	29      	27             	0.9842               	0.9817               	0.0025  	
+'30	30      	26             	0.9863               	0.9843               	0.002   	
+'31	31      	15             	0.9881               	0.9858               	0.0023  	
+'32	32      	19             	0.9897               	0.9877               	0.002   	
+'33	33      	18             	0.9911               	0.9895               	0.0016  	
+'34	34      	16             	0.9923               	0.9911               	0.0012  	
+'35	35      	14             	0.9933               	0.9925               	0.0008  	
+'36	36      	10             	0.9942               	0.9935               	0.0007  	
+'37	37      	10             	0.995                	0.9945               	0.0005  	
+'38	38      	4              	0.9956               	0.9949               	0.0007  	
+'39	39      	4              	0.9962               	0.9953               	0.0009  	
+'40	40      	7              	0.9967               	0.996                	0.0007  	
+'41	41      	1              	0.9972               	0.9961               	0.0011  	
+'42	42      	3              	0.9975               	0.9964               	0.0011  	
+'43	43      	3              	0.9979               	0.9967               	0.0012  	
+'44	44      	5              	0.9981               	0.9972               	0.0009  	
+'45	45      	7              	0.9984               	0.9979               	0.0005  	
+'46	46      	4              	0.9986               	0.9983               	0.0003  	
+'47	47      	2              	0.9988               	0.9985               	0.0003  	
+'48	48      	0              	0.999                	0.9985               	0.0005  	
+'49	49      	4              	0.9991               	0.9989               	0.0002  	
+'50	50      	2              	0.9992               	0.9991               	0.0001  	
+'51	51      	1              	0.9993               	0.9992               	0.0001  	
+'52	52      	1              	0.9994               	0.9993               	0.0001  	
+'53	53      	2              	0.9995               	0.9995               	0       	
+'54	54      	3              	0.9996               	0.9998               	0.0002  	
+'55	55      	0              	0.9996               	0.9998               	0.0002  	
+'56	56      	1              	0.9997               	0.9999               	0.0002  	
+'57	57      	1              	0.9997               	1                    	0.0003  	
+
+'EXPONENTIAL KS VALUE
+'d_value: 0.010133683177847574
+'***********************************************************************************************
+
+
+'********************************************INCLUDES********************************************
+INCLUDE "/lib/splitSubroutines.txt"
+INCLUDE "/lib/vectorCommands.txt"
+INCLUDE "/lib/mathCommands.txt"
+CLEAROUTPUT
+'************************************************************************************************
+
+'***************************************AUXILIAR PROCEDURES**************************************
+
+NEWCMD EXPONENTIAL_CUMULATIVE_FUNCTION exp_cum_probability b_value x_value
+   exp_cum_probability =  1 - 2.7182818284^(-(x_value)/b_value)
+END
+
+NEWCMD GET_EXPECTED_CUMULATIVE_PROBABILITIES bin_ini bin_size sample_size  e_cum_probabilities B_value
+   counter = 1
+   SIZE bin_ini b_size
+   WHILE counter <= b_size
+      TAKE bin_ini counter low_interval
+      high_interval = low_interval + bin_size
+      EXPONENTIAL_CUMULATIVE_FUNCTION exp_cum_probability B_value high_interval
+      PUT exp_cum_probability counter e_cum_probabilities
+      counter = counter + 1
+   END
+END
+
+
+
+NEWCMD GET_OBSERVED_CUMULATIVE_PROBABILITIES  sample_size obs_cum_frecuencies obs_cum_probabilities
+   counter = 1
+   SIZE obs_cum_frecuencies vector_size
+   WHILE counter <= vector_size
+      TAKE obs_cum_frecuencies counter obs_cum_frecuency
+      obs_cum_probability = obs_cum_frecuency / sample_size
+      PUT obs_cum_probability counter obs_cum_probabilities
+      counter = counter + 1
+   END
+END
+
+NEWCMD CALCULATE_KS exp_cum_probabilities obs_cum_probabilities exp_obs_table
+   counter = 1
+   SIZE exp_cum_probabilities vector_size
+   WHILE counter <= vector_size
+      TAKE exp_cum_probabilities counter exp_cum_probability
+      TAKE obs_cum_probabilities counter obs_cum_probability
+      obs_less_exp = obs_cum_probability - exp_cum_probability
+      PUT obs_less_exp counter exp_obs_table
+      counter = counter + 1
+   END
+   ABS exp_obs_table exp_obs_table
+END
+
+NEWCMD PRETTY_TABLE n interval bin_size
+   ADD  1 n n 
+   add  bin_size interval interval
+END
+'************************************************************************************************
+
+'********************************************MAIN PROGRAM****************************************
+
+'User variables ********
+INPUT bin_size  'size of bin size
+READ file "" sample_list
+'COPY 20#1.50 12#4.50 7#7.50 4#10.50 2#13.50 1#16.50 1#19.50 sample_list ' class example
+
+' Global variables *****
+
+'Histogram data*******************
+HISTOGRAM binsize bin_size  sample_list
+HISTOGRAMDATA binsize bin_size sample_list n interval bin_center obs_frecuencies obs_cum_frecuencies
+
+' Stadistic Data**************
+MEAN sample_list mean
+SIZE sample_list sample_size
+PRINT  "**********************************************Sample mean*************************************************"
+PRINT mean
+
+
+' GET Expected cumulative Frecuencies**********
+' It depends of bin_size according to exponencial funtion
+
+GET_EXPECTED_CUMULATIVE_PROBABILITIES  interval bin_size sample_size exp_cum_probabilities mean
+
+GET_OBSERVED_CUMULATIVE_PROBABILITIES sample_size obs_cum_frecuencies obs_cum_probabilities
+CALCULATE_KS exp_cum_probabilities obs_cum_probabilities exp_obs_absolute
+
+MAX exp_obs_absolute d_value
+
+' Print all results
+PRETTY_TABLE n  interval bin_size
+
+'************************************************************************************************
+
+'******************************************************RESULTS*********************************************************
+PRINT  "---------------------------------------------------------------------------------------------------------------"
+PRINT  "***********************************************Table of results************************************************"
+PRINT table n%2.0F interval%8.0F obs_frecuencies%15.0F exp_cum_probabilities%21.4F obs_cum_probabilities%21.4F exp_obs_absolute%8.4F
+PRINT  "***************************************************************************************************************"
+
+PRINT  "---------------------------------------------------------------------------------------------------------------"
+PRINT  "*******************************************Exponential KS value************************************************"
+PRINT "D VALUE" d_value
+
+'************************************************************************************************
+
+
