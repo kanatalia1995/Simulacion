@@ -1,0 +1,182 @@
+'************************************************************************************
+'*****************           SIMULACION- II SEMESTRE 2018           *****************
+'*****************                 TAREA 8 Inventarios              *****************
+'*****************        KATERINE MOLINA SANCHEZ 2013109225        *****************
+'*****************        YONATTAN SERRANO TORRES 2014005692        *****************
+'************************************************************************************
+
+
+
+'************************************************************************************
+' Description
+'************************************************************************************
+
+' ● Total cost of inventory for q = 50 and r = 20.
+'   Total cost, fixed cost, inventory cost and penalty cost.
+'       Refer to the attached "costs_q_r.txt" file to see the tables.
+'       Or run the program: 
+'           Run-> As soon as the program requests the data-> q_value = 50-> r_value = 20
+'           An approximation of the mean_simulation of this is 196449.6666
+
+
+' ● What values ​​of "q" and "r" minimize the problem?
+'   Evaluate 0 <= q <= 100
+'   Evaluate 0 <= r <= q
+' 	In our table: q = 18 & r = 16 -> 92954.71424
+' ● You can refer to the attached "table" file to see the table.
+
+
+'************************************************************************************
+' Global variables 
+'************************************************************************************
+fixed_cost = 100
+GLOBAL fixed_cost
+inventary_cost = 20
+GLOBAL inventary_cost
+penalty_cost = 50
+GLOBAL penalty_cost
+init_global = 50
+GLOBAL init_global
+' Probabilities
+COPY 30#1 40#2 30#3 order_num
+SHUFFLE order_num order_num
+GLOBAL order_num
+'************************************************************************************
+
+
+'************************************************************************************
+'Configuration
+'************************************************************************************
+loop_num  = 30 ' Exactitud
+loop_days = 365 '  Days to simulate
+
+GLOBAL loop_num  ' estimator
+GLOBAL loop_days
+'************************************************************************************
+
+
+
+'************************************************************************************
+' Subroutines 
+'************************************************************************************
+NEWCMD ORDER_NEW_PRODUCT inventory_last days_last days_a order_a q  r counter order_total
+   PUT days_last counter days_a
+   IF days_last < 0 and inventory_last <=r
+      SHUFFLE order_num order_num
+      SAMPLE 1 order_num days_last
+      PUT 1 counter order_a
+      PUT days_last counter days_a
+   ELSEIF days_last > 1
+      days_last = days_last - 1
+      PUT days_last counter days_a
+   ELSEIF days_last = 1
+      PUT 0 counter days_a
+      IF inventory_last < 0
+         inventory_last = q
+      ELSE
+         inventory_last = q + inventory_last
+      END
+      days_last = -1
+      order_total = order_total + 1
+   ELSE
+      days_last = -1
+   END
+END
+NEWCMD GENERATE_INVENTARY_SIMULATION q r result init_a order_a days_a purchase_a inventory_a inventary_total order_total penalty_total
+   ini = init_global
+   inventory_last = init_global
+   days_last = -1
+   counter = 1
+   WHILE counter <= loop_days
+      POISSON 1 7 num_poisson
+      ORDER_NEW_PRODUCT inventory_last days_last days_a order_a q  r counter order_total
+      PUT inventory_last counter init_a ' the last inventory is the current init inventory
+      PUT num_poisson counter purchase_a
+      inventory_last = inventory_last - num_poisson
+      PUT inventory_last counter inventory_a
+      IF inventory_last >= 0
+         inventary_total = inventary_total + inventory_last
+      ELSE
+         ABS inventory_last penalty
+         penalty_total = penalty_total + penalty
+      END
+      counter = counter+1
+   END
+END
+
+NEWCMD CALCULATE_COST inventory_total order_total penalty_total cost
+   fixed_cost_cal = order_total * fixed_cost
+   penalty_cost_cal = penalty_total * penalty_cost
+   inventory_cost_cal = inventory_total * inventary_cost
+   cost = fixed_cost_cal + penalty_cost_cal + inventory_cost_cal
+END
+
+NEWCMD GENERATE_SIMULATION_MEAN q_value r_value mean_simulation  init_a order_a days_a purchase_a inventory_a
+   REPEAT loop_num
+      COPY loop_days#0 init_a
+      COPY loop_days#0 days_a
+      COPY loop_days#0 order_a
+      COPY loop_days#0 purchase_a
+      COPY loop_days#0 inventory_a
+      
+      inventory_total = 0
+      order_total = 0
+      penalty_total = 0
+      GENERATE_INVENTARY_SIMULATION q_value r_value result init_a order_a days_a purchase_a inventory_a inventory_total order_total penalty_total
+      CALCULATE_COST inventory_total order_total penalty_total cost
+
+      COPY 1,loop_days num
+      PRINT table num%3.0F init_a%6.0F  order_a%8.0F days_a%6.0F purchase_a inventory_a%10.0F
+
+      mean_simulation = mean_simulation + cost
+   END
+   mean_simulation = mean_simulation / loop_num
+   
+END
+'************************************************************************************
+
+
+'************************************************************************************
+' Main program
+'************************************************************************************
+
+'This was an auxiliary routine that helped us to build the table.
+NEWCMD GENERATETABLE 
+CLEAROUTPUT
+mean_simutation =  0
+COPY loop_days#0 init_a
+COPY loop_days#0 days_a
+COPY loop_days#0 order_a
+COPY loop_days#0 purchase_a
+COPY loop_days#0 inventory_a
+q_value = 0
+r_value = 100
+
+    while q_value <= 100
+       GENERATE_SIMULATION_MEAN q_value r_value mean_simutation init_a order_a days_a purchase_a inventory_a 
+        'print r_value 
+        print mean_simutation
+        q_value = q_value + 1
+    END 
+END
+
+'GENERATETABLE
+
+'-----------------------------
+
+CLEAROUTPUT
+
+ ' User inputs 
+INPUT q_value
+INPUT r_value
+mean_simutation =  0
+
+COPY loop_days#0 init_a
+COPY loop_days#0 days_a
+COPY loop_days#0 order_a
+COPY loop_days#0 purchase_a
+COPY loop_days#0 inventory_a
+
+GENERATE_SIMULATION_MEAN q_value r_value mean_simutation init_a order_a days_a purchase_a inventory_a
+PRINT mean_simutation
+'************************************************************************************
